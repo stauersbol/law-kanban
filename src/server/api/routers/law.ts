@@ -52,6 +52,10 @@ export const lawRouter = createTRPCRouter({
     // Wait for all promises to settle.
     const lawsSettled = await Promise.allSettled(lawsPromises);
 
+    // Other wait of all promises to settle.
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const lawsSettled2 = await Promise.all(lawsPromises);
+
     // Filter out the rejected promises and map the fulfilled promises to the Prisma.LawCreateInput type to be used in the Prisma createManyAndReturn method.
     const laws = lawsSettled
       .filter((law) => law.status === "fulfilled")
