@@ -29,6 +29,7 @@ export const lawRouter = createTRPCRouter({
     const lawsRes = (await axios.get<Law>(lawsUrl, { params: lawsParams })).data
       .value;
 
+    // Map the laws to promises that fetch the status of each law.
     const lawsPromises = lawsRes.map(async (law) => {
       const statusParams = {
         $filter: `id eq ${law.statusid}`,
@@ -48,6 +49,7 @@ export const lawRouter = createTRPCRouter({
       };
     });
 
+    // Wait for all promises to settle.
     const lawsSettled = await Promise.allSettled(lawsPromises);
 
     // Filter out the rejected promises and map the fulfilled promises to the Prisma.LawCreateInput type to be used in the Prisma createManyAndReturn method.
