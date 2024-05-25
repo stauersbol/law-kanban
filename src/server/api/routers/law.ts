@@ -62,4 +62,8 @@ export const lawRouter = createTRPCRouter({
       skipDuplicates: true,
     });
   }),
+
+  fetchAll: publicProcedure.query(async ({ ctx }) => {
+    return ctx.db.law.findMany();
+  }),
 });
