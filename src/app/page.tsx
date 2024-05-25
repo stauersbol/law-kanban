@@ -1,4 +1,3 @@
-
 import { Kanban } from "./_components/kanban";
 import { TopBar } from "./_components/top-bar";
 
